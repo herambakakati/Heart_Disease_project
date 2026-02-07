@@ -35,7 +35,8 @@ st.markdown("Enter patient clinical details below:")
 # Input fields (MATCH DATASET ORDER)
 # --------------------------------------------------
 age = st.slider("Age", 1, 120, 60)
-anaemia = st.selectbox("Anaemia", [0, 1])
+anaemia_label = st.selectbox("Anaemia", ["No", "Yes"])
+anaemia = 0 if anaemia_label == "No" else 1
 creatinine_phosphokinase = st.number_input("Creatinine Phosphokinase", 0, 8000)
 diabetes = st.radio("Diabetes", [0, 1], format_func=lambda x: "Yes" if x else "No")
 ejection_fraction = st.slider("Ejection Fraction", 0, 100, 38)
@@ -45,7 +46,8 @@ serum_creatinine = st.number_input("Serum Creatinine", 0.0, 10.0, 1.2)
 serum_sodium = st.number_input("Serum Sodium", 0, 200, 137)
 sex_label = st.selectbox("Sex", ["Female", "Male"])
 sex = 0 if sex_label == "Female" else 1
-smoking = st.selectbox("Smoking", [0, 1])
+smoking_label = st.selectbox("Smoking", ["No", "Yes"])
+smoking = 0 if smoking_label == "No" else 1
 time = st.number_input("Follow-up Time (days)", 0, 300, 120)
 
 # --------------------------------------------------
@@ -77,3 +79,4 @@ if st.button("🔍 Predict"):
         st.error(f"⚠️ High Risk of Death Event\n\nProbability: {probability:.2%}")
     else:
         st.success(f"✅ Low Risk of Death Event\n\nProbability: {probability:.2%}")
+
